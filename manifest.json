@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "abdulroufsidhu.awqat",
+  "name": "Awqat",
+  "version": "2.0.0",
+  "author": "Abdul Rauf",
+  "license": "MIT",
+  "description": "Prayer times for where you are, calculated locally: a signed counter in the bar, the azan as an alarm, masjid jamaat times and reminders, and a record of your prayers.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Awqat (prayer times)",
+    "description": "The current prayer and a signed counter in the bar. Click for today's Starts / Jamaat / Ends, record how you prayed, the last 30 days, and settings. Plays the azan when a prayer begins and before jamaat.",
+    "category": "Time",
+    "aliases": ["salah", "namaz", "azan", "adhan", "jamaat"],
+    "allowMultiple": false,
+    "defaultSection": "centerEnd",
+    "defaults": {
+      "location": "auto",
+      "timezone": "auto",
+      "method": "Makkah",
+      "asr": "Standard",
+      "hijriOffset": 0,
+      "hour24": true,
+      "notify": true,
+      "azanFor": ["fajr", "dhuhr", "asr", "maghrib", "isha"],
+      "azanSound": "",
+      "azanFajrSound": "",
+      "azanMaxMinutes": 30,
+      "jamaatLead": 20,
+      "checkIn": true,
+      "checkInLead": 15,
+      "barShows": "Counter",
+      "colorJamaat": "",
+      "colorAlone": "",
+      "colorLate": "",
+      "colorMissed": ""
+    },
+    "schema": [
+      { "key": "location", "type": "enum", "label": "Location", "options": ["auto", "manual"], "defaultValue": "auto",
+        "description": "auto looks the city up from the internet connection (geo.omarchy.org); manual uses `place`. Set from the panel's settings page." },
+      { "key": "place", "type": "string", "label": "Chosen place { name, lat, lon, zone }", "defaultValue": "" },
+      { "key": "timezone", "type": "string", "label": "Time zone (IANA id, or auto)", "defaultValue": "auto" },
+      { "key": "method", "type": "enum", "label": "Calculation method", "options": ["Makkah", "Karachi", "MWL", "ISNA", "Egypt", "Kuwait", "Qatar", "Singapore"], "defaultValue": "Makkah" },
+      { "key": "asr", "type": "enum", "label": "Asr", "options": ["Standard", "Hanafi"], "defaultValue": "Standard" },
+      { "key": "hijriOffset", "type": "integer", "label": "Hijri date adjustment (days)", "min": -2, "max": 2, "step": 1, "defaultValue": 0 },
+      { "key": "hour24", "type": "boolean", "label": "24-hour time", "defaultValue": true },
+      { "key": "notify", "type": "boolean", "label": "Azan and notifications", "defaultValue": true },
+      { "key": "azanFor", "type": "multiselect", "label": "Azan for", "options": ["fajr", "dhuhr", "asr", "maghrib", "isha"], "defaultValue": ["fajr", "dhuhr", "asr", "maghrib", "isha"] },
+      { "key": "azanSound", "type": "path", "label": "Azan sound (empty = bundled Makkah azan)", "defaultValue": "" },
+      { "key": "azanFajrSound", "type": "path", "label": "Fajr azan sound (empty = bundled Makkah Fajr azan)", "defaultValue": "" },
+      { "key": "azanMaxMinutes", "type": "integer", "label": "Stop the azan after (minutes, 0 = never)", "min": 0, "max": 120, "step": 5, "defaultValue": 30 },
+      { "key": "jamaat", "type": "string", "label": "Jamaat times { fajr, dhuhr, asr, maghrib, isha, jumuah }: \"13:30\" or \"+15\"", "defaultValue": "" },
+      { "key": "jamaatLead", "type": "integer", "label": "Remind before jamaat (minutes)", "min": 5, "max": 60, "step": 5, "defaultValue": 20 },
+      { "key": "checkIn", "type": "boolean", "label": "Ask whether I prayed", "defaultValue": true },
+      { "key": "checkInLead", "type": "integer", "label": "Ask before the time ends (minutes)", "min": 5, "max": 60, "step": 5, "defaultValue": 15 },
+      { "key": "barShows", "type": "enum", "label": "Shown in the bar", "options": ["Counter", "Next", "Both"], "defaultValue": "Counter" },
+      { "key": "colorJamaat", "type": "string", "label": "Colour for jamaat (#rrggbb, empty = theme green)", "defaultValue": "" },
+      { "key": "colorAlone", "type": "string", "label": "Colour for alone (#rrggbb, empty = theme yellow)", "defaultValue": "" },
+      { "key": "colorLate", "type": "string", "label": "Colour for late (#rrggbb, empty = theme orange)", "defaultValue": "" },
+      { "key": "colorMissed", "type": "string", "label": "Colour for missed (#rrggbb, empty = theme red)", "defaultValue": "" }
+    ]
+  }
+}
